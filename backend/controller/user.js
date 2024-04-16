@@ -8,6 +8,7 @@ const jwt = require("jsonwebtoken");
 const sendMail = require("../utils/sendMail");
 const sendToken = require("../utils/jwtToken");
 const { isAuthenticated, isAdmin } = require("../middleware/auth");
+const Razorpay = require('razorpay');
 
 // create user
 router.post("/create-user", async (req, res, next) => {
@@ -523,5 +524,32 @@ router.post("/reset-password/", async (req, res, next) => {
         return next(new ErrorHandler(error.message, 500));
     }
 });
+
+
+
+const razorpay = new Razorpay({
+    key_id: 'rzp_test_TvkHy7JJ6Uh2vB', // Replace with your Razorpay key id
+    key_secret: 'BuQRiljv5mtMpUXvxOS3TNuP' // Replace with your Razorpay key secret
+  });
+  
+  // Endpoint to verify payment
+  router.post('/create-order', async (req, res) => {
+    const { amount } = req.body;
+
+  try {
+    const options = {
+      amount: amount * 100, // amount in paise
+      currency: 'INR',
+      receipt: 'order_rcptid_11' // Replace with your receipt ID
+    };
+
+    const order = await razorpay.orders.create(options);
+    console.log('dejhvfjehyw',order);
+    res.status(200).json({ order });
+  } catch (error) {
+    console.error('Error creating order:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+  });
 
 module.exports = router;
