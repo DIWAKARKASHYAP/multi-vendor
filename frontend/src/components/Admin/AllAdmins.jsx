@@ -1,36 +1,62 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getAllUsers } from "../../redux/actions/user";
+import { getAllAdmins } from "../../redux/actions/user";
 import { DataGrid } from "@material-ui/data-grid";
 import { AiOutlineDelete } from "react-icons/ai";
-import { Button } from "@material-ui/core";
+import { Button, Input } from "@material-ui/core";
 import styles from "../../styles/styles";
 import { RxCross1 } from "react-icons/rx";
 import axios from "axios";
 import { server } from "../../server";
 import { toast } from "react-toastify";
 
-const AllUsers = () => {
+const AllAdmins = () => {
     const dispatch = useDispatch();
-    const { users, user } = useSelector((state) => state.user);
+    const { admins, user } = useSelector((state) => state.user);
     const [open, setOpen] = useState(false);
+    const [openNew, setOpenNew] = useState(false);
+    const [newAdminEmail, setNewAdminEmail] = useState("");
+
     const [userId, setUserId] = useState("");
 
     useEffect(() => {
-        dispatch(getAllUsers());
+        dispatch(getAllAdmins());
     }, [dispatch]);
 
     const handleDelete = async (id) => {
         await axios
-            .delete(`${server}/user/delete-user/${id}`, {
-                withCredentials: true,
-            })
+            .put(
+                `${server}/user/remove-admin`,
+                { id: id },
+                {
+                    withCredentials: true,
+                }
+            )
             .then((res) => {
                 toast.success(res.data.message);
             });
 
-        dispatch(getAllUsers());
+        dispatch(getAllAdmins());
+    };
+    const handleNewAdmin = async () => {
+        await axios
+            .put(
+                `${server}/user/new-admin`,
+                { email: newAdminEmail },
+                {
+                    withCredentials: true,
+                }
+            )
+            .then((res) => {
+                toast.success(res.data.message);
+                dispatch(getAllAdmins());
+            })
+            .catch((error) => {
+                toast.error("user not exist");
+            });
+
+        dispatch(getAllAdmins());
     };
 
     const columns = [
@@ -75,28 +101,11 @@ const AllUsers = () => {
             renderCell: (params) => {
                 const { role, id } = params.row;
                 const isSuperAdmin = user.role === "SuperAdmin";
-                const isAdmin = user.role === "Admin";
-                console.log(user.role);
-                if (isAdmin) {
-                    return (
-                        <>
-                            <Button
-                                disabled={
-                                    role === "SuperAdmin" || role === "Admin"
-                                }
-                                onClick={() => setUserId(id) || setOpen(true)}
-                            >
-                                <AiOutlineDelete size={20} />
-                            </Button>
-                        </>
-                    );
-                }
 
                 if (isSuperAdmin) {
                     return (
                         <>
                             <Button
-                                disabled={role === "SuperAdmin"}
                                 onClick={() => setUserId(id) || setOpen(true)}
                             >
                                 <AiOutlineDelete size={20} />
@@ -104,27 +113,13 @@ const AllUsers = () => {
                         </>
                     );
                 }
-
-                // return (
-                //     <>
-                //         <Button
-                //             disabled={
-                //                 (isSuperAdmin && role === "SuperAdmin") ||
-                //                 (isAdmin && currentUserRole !== "SuperAdmin")
-                //             }
-                //             onClick={() => setUserId(id) || setOpen(true)}
-                //         >
-                //             <AiOutlineDelete size={20} />
-                //         </Button>
-                //     </>
-                // );
             },
         },
     ];
 
     const row = [];
-    users &&
-        users.forEach((item) => {
+    admins &&
+        admins.forEach((item) => {
             row.push({
                 id: item._id,
                 name: item.name,
@@ -137,7 +132,54 @@ const AllUsers = () => {
     return (
         <div className="w-full flex justify-center pt-5">
             <div className="w-[97%]">
-                <h3 className="text-[22px] font-Poppins pb-2">All Users</h3>
+                <h3 className="text-[22px] font-Poppins pb-2">All Admins</h3>
+                <Button onClick={() => setOpenNew(true)}>
+                    {" "}
+                    Create new Admin
+                </Button>
+                {openNew && (
+                    <div className="w-full fixed top-0 left-0 z-[999] bg-[#00000039] flex items-center justify-center h-screen">
+                        <div className="w-[95%] 800px:w-[40%] min-h-[20vh] bg-white rounded shadow p-5">
+                            <div className="w-full flex justify-end cursor-pointer">
+                                <RxCross1
+                                    size={25}
+                                    onClick={() => setOpenNew(false)}
+                                />
+                            </div>
+                            <h3 className="text-[25px] text-center py-5 font-Poppins text-[#000000cb]">
+                                Are you sure you wanna make this user to Admin?
+                            </h3>
+                            <input
+                                type="email"
+                                name="email"
+                                autoComplete="email"
+                                required
+                                value={newAdminEmail}
+                                onChange={(e) =>
+                                    setNewAdminEmail(e.target.value)
+                                }
+                                className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                            />
+
+                            <div className="w-full flex items-center justify-center">
+                                <div
+                                    className={`${styles.button} text-white text-[18px] !h-[42px] mr-4`}
+                                    onClick={() => setOpenNew(false)}
+                                >
+                                    cancel
+                                </div>
+                                <div
+                                    className={`${styles.button} text-white text-[18px] !h-[42px] ml-4`}
+                                    onClick={() =>
+                                        setOpenNew(false) || handleNewAdmin()
+                                    }
+                                >
+                                    confirm
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
                 <div className="w-full min-h-[45vh] bg-white rounded">
                     <DataGrid
                         rows={row}
@@ -183,4 +225,4 @@ const AllUsers = () => {
     );
 };
 
-export default AllUsers;
+export default AllAdmins;

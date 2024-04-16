@@ -397,7 +397,8 @@ router.get(
 router.get(
     "/admin-all-users",
     isAuthenticated,
-    isAdmin("Admin"),
+    isAdmin("Admin", "SuperAdmin"),
+
     catchAsyncErrors(async (req, res, next) => {
         try {
             const users = await User.find().sort({
@@ -417,7 +418,8 @@ router.get(
 router.delete(
     "/delete-user/:id",
     isAuthenticated,
-    isAdmin("Admin"),
+    isAdmin("Admin", "SuperAdmin"),
+
     catchAsyncErrors(async (req, res, next) => {
         try {
             const user = await User.findById(req.params.id);
@@ -437,6 +439,122 @@ router.delete(
             res.status(201).json({
                 success: true,
                 message: "User deleted successfully!",
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
+);
+
+// all admins --- for admin
+router.get(
+    "/admin-admins",
+    isAuthenticated,
+    isAdmin("SuperAdmin"),
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const admins = await User.find({ role: "Admin" }).sort({
+                createdAt: -1,
+            });
+            // console.log(admins);
+            res.status(200).json({
+                success: true,
+                admins,
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
+);
+
+router.put(
+    "/new-admin",
+    // isAuthenticated,
+    // isAdmin("SuperAdmin"),
+    catchAsyncErrors(async (req, res, next) => {
+        console.log(req.body);
+        try {
+            const { email } = req.body;
+            // Check if the user exists
+            const user = await User.findOne({ email });
+
+            // If user does not exist, return error response
+            if (!user) {
+                return res.status(404).json({
+                    success: false,
+                    message: "User does not exist.",
+                });
+            }
+
+            // If user role is SuperAdmin, return error response
+            if (user.role === "SuperAdmin") {
+                return res.status(400).json({
+                    success: false,
+                    message: "Cannot update role for SuperAdmin.",
+                });
+            }
+
+            // If user exists and their role is not SuperAdmin, update their role to Admin
+            user.role = "Admin";
+            await user.save();
+
+            // Retrieve updated list of admins
+            const admins = await User.find({ role: "Admin" }).sort({
+                createdAt: -1,
+            });
+
+            // Return success response with updated list of admins
+            res.status(200).json({
+                success: true,
+                message: "User role updated to Admin successfully.",
+                admins,
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
+);
+
+router.put(
+    "/remove-admin",
+    isAuthenticated,
+    // isAdmin("SuperAdmin"),
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const { id } = req.body;
+            // Check if the user exists
+            const user = await User.findById(id);
+
+            // If user does not exist, return error response
+            if (!user) {
+                return res.status(404).json({
+                    success: false,
+                    message: "User does not exist.",
+                });
+            }
+
+            // If user role is not Admin, return error response
+            if (user.role !== "Admin") {
+                return res.status(400).json({
+                    success: false,
+                    message: "User is not an Admin.",
+                });
+            }
+
+            // If user exists and their role is Admin, update their role to User
+            user.role = "user";
+            await user.save();
+
+            // Retrieve updated list of admins
+            const admins = await User.find({ role: "Admin" }).sort({
+                createdAt: -1,
+            });
+
+            // Return success response with updated list of admins
+            res.status(200).json({
+                success: true,
+                message: "Admin privileges removed successfully.",
+                admins,
             });
         } catch (error) {
             return next(new ErrorHandler(error.message, 500));
