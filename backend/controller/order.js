@@ -6,11 +6,14 @@ const { isAuthenticated, isSeller, isAdmin } = require("../middleware/auth");
 const Order = require("../model/order");
 const Shop = require("../model/shop");
 const Product = require("../model/product");
-
+const { isExpired } = require("../middleware/auth");
 // create new order
 router.post(
     "/create-order",
     catchAsyncErrors(async (req, res, next) => {
+        console.log("-----------------------------------------");
+        console.log("create order is working");
+        console.log("-----------------------------------------");
         try {
             const { cart, shippingAddress, user, totalPrice, paymentInfo } =
                 req.body;
@@ -54,6 +57,7 @@ router.post(
 router.get(
     "/get-all-orders/:userId",
     catchAsyncErrors(async (req, res, next) => {
+        console.log("hello");
         try {
             const orders = await Order.find({
                 "user._id": req.params.userId,

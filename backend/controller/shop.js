@@ -4,12 +4,18 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const sendMail = require("../utils/sendMail");
 const Shop = require("../model/shop");
+const Product = require("../model/product");
 const { isAuthenticated, isSeller, isAdmin } = require("../middleware/auth");
 const cloudinary = require("cloudinary");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ErrorHandler = require("../utils/ErrorHandler");
 const sendShopToken = require("../utils/shopToken");
+const Razorpay = require("razorpay");
 
+const razorpay = new Razorpay({
+    key_id: "rzp_test_JPBKvtfFBllt9C", // Replace with your Razorpay key id
+    key_secret: "atQzPRO0UhK5iTXxLBs78tMc", // Replace with your Razorpay key secret
+});
 // create shop
 router.post(
     "/create-shop",
@@ -25,6 +31,13 @@ router.post(
             //   folder: "avatars",
             // });
 
+            const currentDate = new Date();
+            const expirationDate = new Date(
+                currentDate.setMonth(currentDate.getMonth() + 1)
+            );
+
+            console.log(expirationDate);
+
             const seller = {
                 name: req.body.name,
                 email: email,
@@ -36,6 +49,7 @@ router.post(
                 address: req.body.address,
                 phoneNumber: req.body.phoneNumber,
                 zipCode: req.body.zipCode,
+                expirationDate: expirationDate, // Injecting expirationDate into the seller object
             };
 
             const activationToken = createActivationToken(seller);
@@ -90,6 +104,7 @@ router.post(
                 avatar,
                 zipCode,
                 address,
+                expirationDate, // Retrieve expirationDate from the token payload
                 phoneNumber,
             } = newSeller;
 
@@ -106,6 +121,7 @@ router.post(
                 password,
                 zipCode,
                 address,
+                expirationDate, // Assigning expirationDate to the new seller
                 phoneNumber,
             });
 
@@ -350,6 +366,70 @@ router.put(
             res.status(201).json({
                 success: true,
                 seller,
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
+);
+
+router.post(
+    "/renew-subscription",
+    catchAsyncErrors(async (req, res, next) => {
+        const { amount } = req.body;
+        try {
+            const options = {
+                amount: amount * 100, // amount in paise
+                currency: "INR",
+                receipt: "order_rcptid_11", // Replace with your receipt ID
+            };
+
+            const order = await razorpay.orders.create(options);
+            console.log("dejhvfjehyw", order);
+            res.status(200).json({ order });
+        } catch (error) {
+            console.error("Error creating order:", error);
+            res.status(500).json({ error: "Internal server error" });
+        }
+    })
+);
+
+router.put(
+    "/update-expiration",
+    isSeller,
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const { sellerId, months } = req.body;
+
+            // Find the seller by ID
+            const seller = await Shop.findById(sellerId);
+
+            if (!seller) {
+                return next(new ErrorHandler("Seller not found", 404));
+            }
+
+            // Calculate the new expiration date
+            const currentExpirationDate = new Date(seller.expirationDate);
+            const newExpirationDate = new Date(
+                currentExpirationDate.setMonth(
+                    currentExpirationDate.getMonth() + months
+                )
+            );
+
+            // Update the expiration date in the database for the seller
+            seller.expirationDate = newExpirationDate;
+            await seller.save();
+
+            // Update the expiration date in all products where shopId is equal to sellerId
+            await Product.updateMany(
+                { shopId: sellerId },
+                { $set: { "shop.expirationDate": newExpirationDate } }
+            );
+
+            res.status(200).json({
+                success: true,
+                message: "Expiration date updated successfully",
+                newExpirationDate,
             });
         } catch (error) {
             return next(new ErrorHandler(error.message, 500));

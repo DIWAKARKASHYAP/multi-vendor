@@ -1,22 +1,24 @@
-import React from 'react'
-import CheckoutSteps from '../components/Checkout/CheckoutSteps'
-import Footer from '../components/Layout/Footer'
-import Header from '../components/Layout/Header'
-import Payment from "../components/Payment/Payment";
+import React from "react";
+import CheckoutSteps from "../components/Checkout/CheckoutSteps";
+import Footer from "../components/Layout/Footer";
+import Header from "../components/Layout/Header";
+// import Payment from "../components/Payment/Payment";
+import NewPayment from "../components/Payment/NewPayment";
 
 const PaymentPage = () => {
-  return (
-    <div className='w-full min-h-screen bg-[#f6f9fc]'>
-       <Header />
-       <br />
-       <br />
-       <CheckoutSteps active={2} />
-       <Payment />
-       <br />
-       <br />
-       <Footer />
-    </div>
-  )
-}
+    return (
+        <div className="w-full min-h-screen bg-[#f6f9fc]">
+            <Header />
+            <br />
+            <br />
+            <CheckoutSteps active={2} />
+            {/* <Payment /> */}
+            <NewPayment />
+            <br />
+            <br />
+            <Footer />
+        </div>
+    );
+};
 
-export default PaymentPage
+export default PaymentPage;

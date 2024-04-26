@@ -113,11 +113,22 @@ router.get(
     "/get-all-products",
     catchAsyncErrors(async (req, res, next) => {
         try {
-            const products = await Product.find().sort({ createdAt: -1 });
+            const currentDate = new Date();
 
-            res.status(201).json({
+            // Fetch products with associated shop information
+            const products = await Product.find()
+                .populate("shop")
+                .sort({ createdAt: -1 });
+
+            // Filter products whose associated shop's expiration date is in the future
+            const filteredProducts = products.filter((product) => {
+                const expirationDate = new Date(product.shop.expirationDate);
+                return expirationDate >= currentDate;
+            });
+
+            res.status(200).json({
                 success: true,
-                products,
+                products: filteredProducts,
             });
         } catch (error) {
             return next(new ErrorHandler(error, 400));

@@ -36,6 +36,7 @@ import {
     ShopSettingsPage,
     ShopWithDrawMoneyPage,
     ShopInboxPage,
+    ShopDashboardRenew,
 } from "./routes/ShopRoutes";
 import {
     AdminDashboardPage,
@@ -177,6 +178,14 @@ const App = () => {
                         <SellerProtectedRoute>
                             <ShopDashboardPage />
                         </SellerProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/dashboard-renew"
+                    element={
+                        <>
+                            <ShopDashboardRenew />
+                        </>
                     }
                 />
                 <Route
