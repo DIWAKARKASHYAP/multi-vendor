@@ -1,4 +1,4 @@
-const app = require("./app");
+const app = require("./utils/app");
 const connectDatabase = require("./db/Database");
 const cloudinary = require("cloudinary");
 
