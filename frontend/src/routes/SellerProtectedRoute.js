@@ -8,11 +8,15 @@ const SellerProtectedRoute = ({ children }) => {
         (state) => state.seller
     );
 
+    // console.log(seller);
+
     if (isLoading === true) {
         return <Loader />;
     } else {
         if (!isSeller) {
             return <Navigate to={`/shop-login`} replace />;
+        } else if (seller.suspend) {
+            return <Navigate to={`/suspend`} replace />;
         } else if (seller && new Date(seller.expirationDate) < new Date()) {
             return <Navigate to={`/dashboard-renew`} replace />;
         }

@@ -36,7 +36,7 @@ router.post(
                 currentDate.setMonth(currentDate.getMonth() + 1)
             );
 
-            console.log(expirationDate);
+            // console.log(expirationDate);
 
             const seller = {
                 name: req.body.name,
@@ -385,10 +385,10 @@ router.post(
             };
 
             const order = await razorpay.orders.create(options);
-            console.log("dejhvfjehyw", order);
+            // console.log("dejhvfjehyw", order);
             res.status(200).json({ order });
         } catch (error) {
-            console.error("Error creating order:", error);
+            // console.error("Error creating order:", error);
             res.status(500).json({ error: "Internal server error" });
         }
     })
@@ -430,6 +430,77 @@ router.put(
                 success: true,
                 message: "Expiration date updated successfully",
                 newExpirationDate,
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
+);
+
+// Add this code to your existing routes file
+
+// Suspend seller
+router.put(
+    "/suspend-seller/:id",
+    // isAuthenticated,
+    // isAdmin("Admin", "SuperAdmin"),
+    catchAsyncErrors(async (req, res, next) => {
+        // console.log("-----------------------------------------");
+        try {
+            const { id } = req.params;
+            // console.log(id);
+            // Find the seller by ID
+            const seller = await Shop.findById(id);
+
+            // console.log(seller);
+            if (!seller) {
+                return next(new ErrorHandler("Seller not found", 404));
+            }
+
+            // Update the 'suspend' field to true
+            seller.suspend = true;
+
+            // Save the updated seller
+            await seller.save();
+
+            res.status(200).json({
+                success: true,
+                message: "Seller suspended successfully",
+                seller,
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
+);
+// remove suspend
+router.put(
+    "/remove-suspend-seller/:id",
+    // isAuthenticated,
+    // isAdmin("Admin", "SuperAdmin"),
+    catchAsyncErrors(async (req, res, next) => {
+        // console.log("-----------------------------------------");
+        try {
+            const { id } = req.params;
+            // console.log(id);
+            // Find the seller by ID
+            const seller = await Shop.findById(id);
+
+            // console.log(seller);
+            if (!seller) {
+                return next(new ErrorHandler("Seller not found", 404));
+            }
+
+            // Update the 'suspend' field to true
+            seller.suspend = false;
+
+            // Save the updated seller
+            await seller.save();
+
+            res.status(200).json({
+                success: true,
+                message: "Seller suspended successfully",
+                seller,
             });
         } catch (error) {
             return next(new ErrorHandler(error.message, 500));

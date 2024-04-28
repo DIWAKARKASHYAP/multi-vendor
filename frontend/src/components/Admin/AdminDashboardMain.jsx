@@ -22,12 +22,38 @@ const AdminDashboardMain = () => {
         dispatch(getAllOrdersOfAdmin());
         dispatch(getAllSellers());
     }, []);
-
+    console.log(adminOrders);
     const adminEarning =
         adminOrders &&
         adminOrders.reduce((acc, order) => acc + order.totalPrice * 0.1, 0);
 
     const adminBalance = adminEarning?.toFixed(2);
+
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth() + 1; // Month is zero-based, so add 1
+
+    const monthlySales =
+        adminOrders &&
+        adminOrders
+            .filter((order) => {
+                const orderDate = new Date(order.createdAt);
+                return (
+                    orderDate.getFullYear() === currentYear &&
+                    orderDate.getMonth() + 1 === currentMonth
+                );
+            })
+            .reduce((acc, order) => acc + order.totalPrice, 0)
+            .toFixed(2);
+
+    const yearlySales =
+        adminOrders &&
+        adminOrders
+            .filter(
+                (order) =>
+                    new Date(order.createdAt).getFullYear() === currentYear
+            )
+            .reduce((acc, order) => acc + order.totalPrice, 0)
+            .toFixed(2);
 
     const columns = [
         { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
@@ -86,7 +112,7 @@ const AdminDashboardMain = () => {
             ) : (
                 <div className="w-full p-4">
                     <h3 className="text-[22px] font-Poppins pb-2">Overview</h3>
-                    <div className="w-full block 800px:flex items-center justify-between">
+                    <div className="w-full block 800px:flex items-center justify-between flex-wrap">
                         <div className="w-full mb-4 800px:w-[30%] min-h-[20vh] bg-white shadow rounded px-2 py-5">
                             <div className="flex items-center">
                                 <AiOutlineMoneyCollect
@@ -102,6 +128,40 @@ const AdminDashboardMain = () => {
                             </div>
                             <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">
                                 $ {adminBalance}
+                            </h5>
+                        </div>
+                        <div className="w-full mb-4 800px:w-[30%] min-h-[20vh] bg-white shadow rounded px-2 py-5">
+                            <div className="flex items-center">
+                                <AiOutlineMoneyCollect
+                                    size={30}
+                                    className="mr-2"
+                                    fill="#00000085"
+                                />
+                                <h3
+                                    className={`${styles.productTitle} !text-[18px] leading-5 !font-[400] text-[#00000085]`}
+                                >
+                                    Monthly Sales
+                                </h3>
+                            </div>
+                            <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">
+                                $ {monthlySales}
+                            </h5>
+                        </div>
+                        <div className="w-full mb-4 800px:w-[30%] min-h-[20vh] bg-white shadow rounded px-2 py-5">
+                            <div className="flex items-center">
+                                <AiOutlineMoneyCollect
+                                    size={30}
+                                    className="mr-2"
+                                    fill="#00000085"
+                                />
+                                <h3
+                                    className={`${styles.productTitle} !text-[18px] leading-5 !font-[400] text-[#00000085]`}
+                                >
+                                    Yearly Sales
+                                </h3>
+                            </div>
+                            <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">
+                                $ {yearlySales}
                             </h5>
                         </div>
 

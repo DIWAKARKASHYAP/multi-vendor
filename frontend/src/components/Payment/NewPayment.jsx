@@ -38,8 +38,10 @@ const NewPayment = () => {
         },
     };
 
-    const cashOnDeliveryHandler = async (e) => {
+    const RazorPayHandler = async (e) => {
         e.preventDefault();
+
+        console.log("running razorpay");
 
         const config = {
             headers: {
@@ -63,6 +65,32 @@ const NewPayment = () => {
             });
     };
 
+    const cashOnDeliveryHandler = async (e) => {
+        e.preventDefault();
+        console.log("running cashOnDeliveryHandler");
+
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        };
+
+        order.paymentInfo = {
+            type: " Cash On Delivery ",
+        };
+
+        await axios
+            .post(`${server}/order/create-order`, order, config)
+            .then((res) => {
+                setOpen(false);
+                navigate("/order/success");
+                toast.success("Order successful!");
+                localStorage.setItem("cartItems", JSON.stringify([]));
+                localStorage.setItem("latestOrder", JSON.stringify([]));
+                window.location.reload();
+            });
+    };
+
     return (
         <div className="w-full flex flex-col items-center py-8">
             <div className="w-[90%] 1000px:w-[70%] block 800px:flex">
@@ -71,6 +99,7 @@ const NewPayment = () => {
                         user={user}
                         open={open}
                         setOpen={setOpen}
+                        RazorPayHandler={RazorPayHandler}
                         cashOnDeliveryHandler={cashOnDeliveryHandler}
                         orderData={orderData}
                         order={order}
@@ -88,6 +117,7 @@ const PaymentInfo = ({
     user,
     open,
     setOpen,
+    RazorPayHandler,
     cashOnDeliveryHandler,
     orderData,
     order,
@@ -119,6 +149,37 @@ const PaymentInfo = ({
                             amount={orderData?.totalPrice}
                             order={order}
                         />
+                    </div>
+                ) : null}
+            </div>
+            <div>
+                <div className="flex w-full pb-5 border-b mb-2">
+                    <div
+                        className="w-[25px] h-[25px] rounded-full bg-transparent border-[3px] border-[#1d1a1ab4] relative flex items-center justify-center"
+                        onClick={() => setSelect(2)}
+                    >
+                        {select === 2 ? (
+                            <div className="w-[13px] h-[13px] bg-[#1d1a1acb] rounded-full" />
+                        ) : null}
+                    </div>
+                    <h4 className="text-[18px] pl-2 font-[600] text-[#000000b1]">
+                        Cash on Delivery
+                    </h4>
+                </div>
+
+                {/* cash on delivery */}
+                {select === 2 ? (
+                    <div className="w-full flex">
+                        <form
+                            className="w-full"
+                            onSubmit={cashOnDeliveryHandler}
+                        >
+                            <input
+                                type="submit"
+                                value="Confirm"
+                                className={`${styles.button} !bg-[#f63b60] text-[#fff] h-[45px] rounded-[5px] cursor-pointer text-[18px] font-[600]`}
+                            />
+                        </form>
                     </div>
                 ) : null}
             </div>

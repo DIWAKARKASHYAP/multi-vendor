@@ -601,10 +601,12 @@ export const footerProductLinks = [
         link: "/carrers",
     },
     {
-        name: "Store Locations",
+        name: "Terms",
+        link: "/terms",
     },
     {
-        name: "Our Blog",
+        name: "Privacy Policy",
+        link: "/privacy",
     },
     {
         name: "Reviews",

@@ -8,6 +8,13 @@ const Shop = require("../model/shop");
 const cloudinary = require("cloudinary");
 const ErrorHandler = require("../utils/ErrorHandler");
 
+// cloudinary.config({
+//     cloud_name: process.env.CLOUDINARY_NAME,
+//     api_key: process.env.CLOUDINARY_API_KEY,
+//     api_secret: process.env.CLOUDINARY_API_SECRET,
+// });
+
+// console.log(process.env.CLOUDINARY_NAME);
 // create product
 router.post(
     "/create-product",
@@ -36,6 +43,7 @@ router.post(
                         }
                     );
 
+                    // console.log(result);
                     imagesLinks.push({
                         public_id: result.public_id,
                         url: result.secure_url,
@@ -45,6 +53,7 @@ router.post(
                 const productData = req.body;
                 productData.images = imagesLinks;
                 productData.shop = shop;
+                productData.approve = false;
 
                 const product = await Product.create(productData);
 
@@ -54,6 +63,67 @@ router.post(
                 });
             }
         } catch (error) {
+            // console.log(error);
+            return next(new ErrorHandler(error, 400));
+        }
+    })
+);
+// approve product
+router.post(
+    "/approve-product",
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const productId = req.body.productId;
+
+            // Find the product by its ID
+            const product = await Product.findById(productId);
+
+            // If the product doesn't exist, return an error
+            if (!product) {
+                return next(new ErrorHandler("Product not found", 404));
+            }
+
+            // Update the product's approve field to true
+            product.approve = true;
+
+            // Save the updated product
+            await product.save();
+
+            // Send a success response
+            res.status(200).json({
+                success: true,
+                message: "Product approved successfully",
+                product: product, // Optionally, you can send the updated product data in the response
+            });
+        } catch (error) {
+            // If an error occurs, return an error response
+            return next(new ErrorHandler(error, 400));
+        }
+    })
+);
+
+// delete product
+router.delete(
+    "/delete-product/:id",
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const productId = req.params.id;
+
+            // Delete the product by its ID
+            const result = await Product.deleteOne({ _id: productId });
+
+            // Check if the deletion was successful
+            if (result.deletedCount === 0) {
+                return next(new ErrorHandler("Product not found", 404));
+            }
+
+            // Send a success response
+            res.status(200).json({
+                success: true,
+                message: "Product deleted successfully",
+            });
+        } catch (error) {
+            // If an error occurs, return an error response
             return next(new ErrorHandler(error, 400));
         }
     })

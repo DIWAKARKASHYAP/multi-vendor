@@ -10,14 +10,19 @@ import Footer from "../components/Layout/Footer";
 
 const HomePage = () => {
     return (
-        <div className="bg-orange-100 ">
+        <div>
             <Header activeHeading={1} />
             <Hero />
+            <div className=" w-[1400px] h-1 my-20 bg-amber-900  rounded-full m-auto"></div>
             <Categories />
+            <div className=" w-[1400px] h-1 my-20 bg-amber-900  rounded-full m-auto"></div>
+
             <BestDeals />
+            <div className=" w-[1400px] h-1 my-20 bg-amber-900  rounded-full m-auto"></div>
             <Events />
+            <div className=" w-[1400px] h-1 my-20 bg-amber-900  rounded-full m-auto"></div>
             <FeaturedProduct />
-            <Sponsored />
+            {/* <Sponsored /> */}
             <Footer />
         </div>
     );

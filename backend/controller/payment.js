@@ -13,9 +13,9 @@ const razorpay = new Razorpay({
 router.post(
     "/razorpay-process",
     catchAsyncErrors(async (req, res, next) => {
-        console.log("-----------------------------------------");
-        console.log("razorpay-process is working");
-        console.log("-----------------------------------------");
+        // console.log("-----------------------------------------");
+        // console.log("razorpay-process is working");
+        // console.log("-----------------------------------------");
         const { amount } = req.body;
         try {
             const options = {
@@ -25,10 +25,10 @@ router.post(
             };
 
             const order = await razorpay.orders.create(options);
-            console.log("dejhvfjehyw", order);
+            // console.log("dejhvfjehyw", order);
             res.status(200).json({ order });
         } catch (error) {
-            console.error("Error creating order:", error);
+            // console.error("Error creating order:", error);
             res.status(500).json({ error: "Internal server error" });
         }
     })

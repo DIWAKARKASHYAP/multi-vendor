@@ -32,7 +32,7 @@ router.post("/create-user", async (req, res, next) => {
             //   url: myCloud.secure_url,
             // },
         };
-        console.log(user);
+        // console.log(user);
         const activationToken = createActivationToken(user);
 
         const activationUrl = `http://localhost:3000/activation/${activationToken}`;
@@ -48,7 +48,7 @@ router.post("/create-user", async (req, res, next) => {
                 message: `please check your email:- ${user.email} to activate your account!`,
             });
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return next(new ErrorHandler(error.message, 500));
         }
     } catch (error) {
@@ -472,7 +472,7 @@ router.put(
     // isAuthenticated,
     // isAdmin("SuperAdmin"),
     catchAsyncErrors(async (req, res, next) => {
-        console.log(req.body);
+        // console.log(req.body);
         try {
             const { email } = req.body;
             // Check if the user exists
@@ -561,5 +561,84 @@ router.put(
         }
     })
 );
+
+router.post(
+    "/forget-password",
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const { email } = req.body;
+
+            // Check if the email exists in the database
+            const user = await User.findOne({ email });
+
+            if (!user) {
+                return next(new ErrorHandler("Email not found", 404));
+            }
+
+            // Generate a reset password token
+            const resetPasswordToken = createResetPasswordToken(user);
+
+            // Create a reset password URL
+            const resetPasswordUrl = `http://localhost:3000/reset-password/${resetPasswordToken}`;
+
+            // Send an email with the reset password link
+            await sendMail({
+                email: user.email,
+                subject: "Reset Your Password",
+                message: `Please click on the link to reset your password: ${resetPasswordUrl}`,
+            });
+
+            res.status(200).json({
+                success: true,
+                message: "Password reset instructions sent to your email.",
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500, "babu not"));
+        }
+    })
+);
+
+// Function to create reset password token
+const createResetPasswordToken = (user) => {
+    return jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {
+        expiresIn: "30m", // Set expiration time for the token
+    });
+};
+
+// reset password
+router.post("/reset-password/", async (req, res, next) => {
+    try {
+        // const { token } = req.params;
+        const { password, token } = req.body;
+
+        // Verify the token
+        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+
+        // Check if the token is valid and not expired
+        if (!decoded) {
+            return next(new ErrorHandler("Invalid or expired token", 400));
+        }
+
+        // Find the user by id from the decoded token
+        const user = await User.findById(decoded.userId);
+
+        if (!user) {
+            return next(new ErrorHandler("User not found", 404));
+        }
+
+        // Update the user's password
+        user.password = password;
+
+        // Save the updated user
+        await user.save();
+
+        res.status(200).json({
+            success: true,
+            message: "Password updated successfully",
+        });
+    } catch (error) {
+        return next(new ErrorHandler(error.message, 500));
+    }
+});
 
 module.exports = router;

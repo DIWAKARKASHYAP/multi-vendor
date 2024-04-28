@@ -21,6 +21,8 @@ import {
     OrderDetailsPage,
     TrackOrderPage,
     UserInbox,
+    ForgetPage,
+    ResetPassword,
 } from "./routes/Routes.js";
 import {
     ShopDashboardPage,
@@ -62,6 +64,12 @@ import { server } from "./server";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import AdminDashboardAdmin from "./pages/AdminDashboardAdmin.jsx";
+import AdminDashboardApproveProducts from "./pages/AdminDashboardApproveProducts.jsx";
+
+import About from "./pages/About";
+import ShopSuspend from "./pages/Shop/ShopSuspend";
+import Privacy from "./pages/Privacy.jsx";
+import Terms from "./pages/Terms.jsx";
 
 const App = () => {
     const [stripeApikey, setStripeApiKey] = useState("");
@@ -97,7 +105,17 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={<LoginPage />} />
+                <Route path="/forgot-password" element={<ForgetPage />} />
+                <Route
+                    path="/reset-password/:token"
+                    element={<ResetPassword />}
+                />
+
                 <Route path="/sign-up" element={<SignupPage />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/privacy" element={<Privacy />} />
+                <Route path="/terms" element={<Terms />} />
+
                 <Route
                     path="/activation/:activation_token"
                     element={<ActivationPage />}
@@ -178,6 +196,15 @@ const App = () => {
                         <SellerProtectedRoute>
                             <ShopDashboardPage />
                         </SellerProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/suspend"
+                    element={
+                        // <SellerProtectedRoute>
+                        <ShopSuspend />
+                        // </SellerProtectedRoute>
                     }
                 />
                 <Route
@@ -270,6 +297,15 @@ const App = () => {
                     }
                 />
                 {/* Admin Routes */}
+
+                <Route
+                    path="/admin-users"
+                    element={
+                        <ProtectedAdminRoute>
+                            <AdminDashboardUsers />
+                        </ProtectedAdminRoute>
+                    }
+                />
                 <Route
                     path="/admin/dashboard"
                     element={
@@ -279,10 +315,10 @@ const App = () => {
                     }
                 />
                 <Route
-                    path="/admin-users"
+                    path="/admin-approve-products"
                     element={
                         <ProtectedAdminRoute>
-                            <AdminDashboardUsers />
+                            <AdminDashboardApproveProducts />
                         </ProtectedAdminRoute>
                     }
                 />
