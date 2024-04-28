@@ -3,7 +3,7 @@
     "name": "e-shop-tutorial",
     "builds": [
         {
-            "src": "server.js",
+            "src": "*.js",
             "use": "@vercel/node"
         }
     ],
