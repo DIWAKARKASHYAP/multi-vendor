@@ -3,20 +3,14 @@
     "name": "e-shop-tutorial",
     "builds": [
         {
-            "src": "./server.js",
+            "src": "server.js",
             "use": "@vercel/node"
-        }
-    ],
-    "rewrites": [
-        {
-            "source": "/{.*}",
-            "destination": "/"
         }
     ],
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "/"
+            "dest": "/server.js"
         }
     ]
 }
