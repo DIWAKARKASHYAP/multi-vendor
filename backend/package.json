@@ -8,7 +8,8 @@
   },
   "scripts": {
     "dev": "node api/index.js",
-    "start": "node api/index.js"
+    "start": "node api/index.js",
+    "vercel-build": "echo hello"
   },
   "author": "shahriar Sajeeb",
   "license": "ISC",
