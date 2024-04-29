@@ -3,10 +3,36 @@ import Footer from "../components/Layout/Footer";
 import Header from "../components/Layout/Header";
 
 const Privacy = () => {
+    const SidebarLink = ({ label }) => {
+        return (
+            <li className="mb-2">
+                <a href="#">{label}</a>
+            </li>
+        );
+    };
+    // Placeholder data until backend integration
+    const demoImages = [
+        "https://media.istockphoto.com/id/1501103626/photo/defocused-background-image-of-a-spacious-hallway-in-a-modern-office.webp?b=1&s=170667a&w=0&k=20&c=3HUg5TdHHWq4rmYJ7lA0Jn9koAesfCrO4lFiEaUFKuI=",
+        "https://www.maidwale.com/images/about/istockphoto-1283119095-170667a.jpg",
+        "https://www.maidwale.com/images/about/istockphoto-1283119095-170667a.jpg",
+    ];
     return (
         <>
             <Header activeHeading={0} />
-            <div className="container mx-auto py-8">
+            <div className=" relative ">
+                <img
+                    src={`${demoImages[0]}`}
+                    alt="Demo Image 1"
+                    className="w-full h-auto rounded-md mb-6 h-[700px] "
+                />
+                <div className=" absolute bottom-56 left-40 text-gray-100 text-5xl font-Poppins font-bold">
+                    Privacy Policy
+                    <div className=" text-xl font-medium">
+                        Learn what we are all about
+                    </div>
+                </div>
+            </div>
+            <div className="container mx-auto py-8 flex">
                 <div className="max-w-4xl mx-auto px-4">
                     <h1 className="text-3xl font-bold mb-4 text-gray-700">
                         Privacy Policy
@@ -212,6 +238,20 @@ const Privacy = () => {
                         Please contact us regarding any questions regarding this
                         statement.
                     </p>
+                </div>
+
+                <div className="w-1/4 ml-8">
+                    <div className="">
+                        <ul>
+                            <SidebarLink label="About Us" />
+                            <SidebarLink label="Terms" />
+                            <SidebarLink label="Company" />
+                            <SidebarLink label="Careers" />
+                            <SidebarLink label="Privacy Policy" />
+                            <SidebarLink label="Store Location" />
+                            {/* Additional sidebar links here */}
+                        </ul>
+                    </div>
                 </div>
             </div>
             <Footer />

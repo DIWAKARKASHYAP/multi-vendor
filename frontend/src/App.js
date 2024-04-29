@@ -70,6 +70,7 @@ import About from "./pages/About";
 import ShopSuspend from "./pages/Shop/ShopSuspend";
 import Privacy from "./pages/Privacy.jsx";
 import Terms from "./pages/Terms.jsx";
+import ContactUs from "./pages/ContactUs.jsx";
 
 const App = () => {
     const [stripeApikey, setStripeApiKey] = useState("");
@@ -113,6 +114,7 @@ const App = () => {
 
                 <Route path="/sign-up" element={<SignupPage />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/contactus" element={<ContactUs />} />
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/terms" element={<Terms />} />
 

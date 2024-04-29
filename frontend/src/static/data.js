@@ -609,25 +609,25 @@ export const footerProductLinks = [
         link: "/privacy",
     },
     {
-        name: "Reviews",
+        name: "Store Location",
     },
 ];
 
 export const footercompanyLinks = [
     {
-        name: "Game & Video",
+        name: "Corporate",
     },
     {
-        name: "Phone &Tablets",
+        name: "Our Blogs",
     },
     {
-        name: "Computers & Laptop",
+        name: "Brand Collaborate",
     },
     {
-        name: "Sport Watches",
+        name: "Return Center",
     },
     {
-        name: "Events",
+        name: "Help",
     },
 ];
 
@@ -640,6 +640,7 @@ export const footerSupportLinks = [
     },
     {
         name: "Contact Us",
+        link: "/contactus",
     },
     {
         name: "Shipping",

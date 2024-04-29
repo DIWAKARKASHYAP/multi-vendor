@@ -17,12 +17,12 @@ const Login = () => {
 
         await axios
             .post(
-                `${server}/user/login-user`,
+                `https://backend-tan-five.vercel.app/api/v2/user/login-user`,
                 {
                     email,
                     password,
-                },
-                { withCredentials: true }
+                }
+                // { withCredentials: true }
             )
             .then((res) => {
                 toast.success("Login Success!");

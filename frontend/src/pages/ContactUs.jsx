@@ -7,42 +7,22 @@ import Loader from "../components/Layout/Loader";
 import ProductCard from "../components/Route/ProductCard/ProductCard";
 import styles from "../styles/styles";
 
-const About = () => {
-    const SidebarLink = ({ label }) => {
-        return (
-            <li className="mb-2">
-                <a href="#">{label}</a>
-            </li>
-        );
-    };
+const ContactUs = () => {
     // Placeholder data until backend integration
     const demoImages = [
-        "https://media.istockphoto.com/id/1501103626/photo/defocused-background-image-of-a-spacious-hallway-in-a-modern-office.webp?b=1&s=170667a&w=0&k=20&c=3HUg5TdHHWq4rmYJ7lA0Jn9koAesfCrO4lFiEaUFKuI=",
+        "https://www.maidwale.com/images/about/istockphoto-1283119095-170667a.jpg",
         "https://www.maidwale.com/images/about/istockphoto-1283119095-170667a.jpg",
         "https://www.maidwale.com/images/about/istockphoto-1283119095-170667a.jpg",
     ];
 
     return (
         <>
-            <div className=" font-Poppins">
+            <div>
                 <Header activeHeading={0} />
-                <div className=" relative ">
-                    <img
-                        src={`${demoImages[0]}`}
-                        alt="Demo Image 1"
-                        className="w-full h-auto rounded-md mb-6 h-[700px] "
-                    />
-                    <div className=" absolute bottom-56 left-40 text-gray-100 text-5xl font-Poppins font-bold">
-                        About Us
-                        <div className=" text-xl font-medium">
-                            Learn what we are all about
-                        </div>
-                    </div>
-                </div>
-                <div className="container mx-auto py-8 flex">
+                <div className="container mx-auto py-8">
                     <div className="max-w-4xl mx-auto px-4">
                         <h1 className="text-3xl font-bold mb-4">
-                            Welcome to Modcub
+                            Welcome to Modcub contact Us
                         </h1>
                         <p className="text-lg mb-6">
                             Welcome to Modcub, your vibrant multivendor
@@ -53,6 +33,11 @@ const About = () => {
                             championing the talents of independent sellers from
                             around the globe.
                         </p>
+                        <img
+                            src={`${demoImages[0]}`}
+                            alt="Demo Image 1"
+                            className="w-full h-auto rounded-md mb-6"
+                        />
                         <p className="text-lg mb-6">
                             At the heart of Modcub is Viral Production Studio, a
                             forward-thinking collective committed to fostering
@@ -108,20 +93,6 @@ const About = () => {
                             e-commerce.
                         </p>
                     </div>
-
-                    <div className="w-1/4 ml-8">
-                        <div className="">
-                            <ul>
-                                <SidebarLink label="About Us" />
-                                <SidebarLink label="Terms" />
-                                <SidebarLink label="Company" />
-                                <SidebarLink label="Careers" />
-                                <SidebarLink label="Privacy Policy" />
-                                <SidebarLink label="Store Location" />
-                                {/* Additional sidebar links here */}
-                            </ul>
-                        </div>
-                    </div>
                 </div>
                 <Footer />
             </div>
@@ -129,4 +100,4 @@ const About = () => {
     );
 };
 
-export default About;
+export default ContactUs;
