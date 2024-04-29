@@ -71,6 +71,11 @@ import ShopSuspend from "./pages/Shop/ShopSuspend";
 import Privacy from "./pages/Privacy.jsx";
 import Terms from "./pages/Terms.jsx";
 import ContactUs from "./pages/ContactUs.jsx";
+import StoreLocation from "./pages/StoreLocation.jsx";
+import Corporate from "./pages/Corporate.jsx";
+import BrandCollaborate from "./pages/BrandCollaborate.jsx";
+import OurBlogs from "./pages/OurBlogs.jsx";
+import Review from "./pages/Review.jsx";
 
 const App = () => {
     const [stripeApikey, setStripeApiKey] = useState("");
@@ -117,6 +122,14 @@ const App = () => {
                 <Route path="/contactus" element={<ContactUs />} />
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/terms" element={<Terms />} />
+                <Route path="/store-location" element={<StoreLocation />} />
+                <Route path="/corporate" element={<Corporate />} />
+                <Route
+                    path="/brand-collaborate"
+                    element={<BrandCollaborate />}
+                />
+                <Route path="/our-blogs" element={<OurBlogs />} />
+                <Route path="/review" element={<Review />} />
 
                 <Route
                     path="/activation/:activation_token"

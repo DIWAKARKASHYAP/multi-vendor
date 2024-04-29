@@ -610,18 +610,22 @@ export const footerProductLinks = [
     },
     {
         name: "Store Location",
+        link: "/store-location",
     },
 ];
 
 export const footercompanyLinks = [
     {
         name: "Corporate",
+        link: "/corporate",
     },
     {
         name: "Our Blogs",
+        link: "/our-blogs",
     },
     {
         name: "Brand Collaborate",
+        link: "/brand-collaborate",
     },
     {
         name: "Return Center",
@@ -634,9 +638,11 @@ export const footercompanyLinks = [
 export const footerSupportLinks = [
     {
         name: "FAQ",
+        link: "/faq",
     },
     {
         name: "Reviews",
+        link: "/review",
     },
     {
         name: "Contact Us",

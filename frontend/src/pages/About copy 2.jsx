@@ -11,12 +11,7 @@ const About = () => {
     const SidebarLink = ({ label }) => {
         return (
             <li className="mb-2">
-                <a
-                    href="#"
-                    className={`${styles.sidebarLink} hover:${styles.sidebarLinkHover}`}
-                >
-                    {label}
-                </a>
+                <a href="#">{label}</a>
             </li>
         );
     };

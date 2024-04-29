@@ -1,12 +1,18 @@
 import React from "react";
 import Footer from "../components/Layout/Footer";
 import Header from "../components/Layout/Header";
+import styles from "../styles/styles";
 
 const Privacy = () => {
     const SidebarLink = ({ label }) => {
         return (
             <li className="mb-2">
-                <a href="#">{label}</a>
+                <a
+                    href="#"
+                    className={`${styles.sidebarLink} hover:${styles.sidebarLinkHover}`}
+                >
+                    {label}
+                </a>
             </li>
         );
     };
@@ -32,7 +38,7 @@ const Privacy = () => {
                     </div>
                 </div>
             </div>
-            <div className="container mx-auto py-8 flex">
+            <div className="container mx-auto py-8 flex flex-col md:flex-row">
                 <div className="max-w-4xl mx-auto px-4">
                     <h1 className="text-3xl font-bold mb-4 text-gray-700">
                         Privacy Policy

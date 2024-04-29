@@ -7,7 +7,7 @@ import Loader from "../components/Layout/Loader";
 import ProductCard from "../components/Route/ProductCard/ProductCard";
 import styles from "../styles/styles";
 
-const About = () => {
+const OurBlogs = () => {
     const SidebarLink = ({ label }) => {
         return (
             <li className="mb-2">
@@ -38,7 +38,7 @@ const About = () => {
                         className="w-full h-auto rounded-md mb-6 md:mb-0 h-[700px]"
                     />
                     <div className="absolute bottom-10 md:bottom-56 left-4 md:left-40 text-gray-100 text-5xl md:text-6xl font-Poppins font-bold">
-                        About Us
+                        Our Blogs
                         <div className="text-base md:text-xl font-medium">
                             Learn what we are all about
                         </div>
@@ -134,4 +134,4 @@ const About = () => {
     );
 };
 
-export default About;
+export default OurBlogs;

@@ -1,11 +1,17 @@
 import React from "react";
 import Footer from "../components/Layout/Footer";
 import Header from "../components/Layout/Header";
+import styles from "../styles/styles";
 const Terms = () => {
     const SidebarLink = ({ label }) => {
         return (
             <li className="mb-2">
-                <a href="#">{label}</a>
+                <a
+                    href="#"
+                    className={`${styles.sidebarLink} hover:${styles.sidebarLinkHover}`}
+                >
+                    {label}
+                </a>
             </li>
         );
     };
@@ -17,20 +23,21 @@ const Terms = () => {
     return (
         <>
             <Header activeHeading={0} />
-            <div className=" relative ">
+            <div className="relative">
                 <img
                     src={`${demoImages[0]}`}
                     alt="Demo Image 1"
-                    className="w-full h-auto rounded-md mb-6 h-[700px] "
+                    className="w-full h-auto rounded-md mb-6 h-[700px]"
                 />
-                <div className=" absolute bottom-56 left-40 text-gray-100 text-5xl font-Poppins font-bold">
+                <div className="absolute bottom-10 md:bottom-56 left-4 md:left-40 text-gray-100 text-5xl md:text-6xl font-Poppins font-bold">
                     TERMS OF USE
-                    <div className=" text-xl font-medium">
+                    <div className="text-base md:text-xl font-medium">
                         Learn what we are all about
                     </div>
                 </div>
             </div>
-            <div className="  container mx-auto py-8 flex">
+
+            <div className="container mx-auto py-8 flex flex-col md:flex-row">
                 <div className=" max-w-4xl m-auto px-7">
                     <h1 className="text-3xl font-bold mb-4">TERMS OF USE</h1>
                     <p className="mb-4">
