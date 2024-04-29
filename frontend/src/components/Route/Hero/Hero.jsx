@@ -9,7 +9,7 @@ const Hero = () => {
             <div className="h-[400px] sm:h-[600px]">
                 <Carousel indicators={false}>
                     <img
-                        src="https://img.freepik.com/premium-photo/glass-wall-modern-office-lobby-interior_6091-4326.jpg?size=626&ext=jpg&ga=GA1.1.553209589.1714089600&semt=ais"
+                        src="https://img.freepik.com/free-photo/black-friday-elements-assortment_23-2149074076.jpg?w=1380&t=st=1714400149~exp=1714400749~hmac=9678fc191ad28977e94e6cf2aa38d5ed303236186cb910a8d2946e4dc8244f24"
                         alt="..."
                     />
                     <img
