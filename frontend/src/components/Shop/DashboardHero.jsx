@@ -105,7 +105,7 @@ const DashboardHero = () => {
                         </h3>
                     </div>
                     <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">
-                        ${availableBalance}
+                        Rs {availableBalance}
                     </h5>
                     <Link to="/dashboard-withdraw-money">
                         <h5 className="pt-4 pl-[2] text-[#077f9c]">

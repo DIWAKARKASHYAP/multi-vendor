@@ -47,13 +47,14 @@ const AdminDashboardMain = () => {
 
     const yearlySales =
         adminOrders &&
-        adminOrders
-            .filter(
-                (order) =>
-                    new Date(order.createdAt).getFullYear() === currentYear
-            )
-            .reduce((acc, order) => acc + order.totalPrice, 0)
-            .toFixed(2);
+        (
+            adminOrders
+                .filter(
+                    (order) =>
+                        new Date(order.createdAt).getFullYear() === currentYear
+                )
+                .reduce((acc, order) => acc + order.totalPrice, 0) / 10
+        ).toFixed(2);
 
     const columns = [
         { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
@@ -127,7 +128,7 @@ const AdminDashboardMain = () => {
                                 </h3>
                             </div>
                             <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">
-                                $ {adminBalance}
+                                Rs {adminBalance}/-
                             </h5>
                         </div>
                         <div className="w-full mb-4 800px:w-[30%] min-h-[20vh] bg-white shadow rounded px-2 py-5">
@@ -144,7 +145,7 @@ const AdminDashboardMain = () => {
                                 </h3>
                             </div>
                             <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">
-                                $ {monthlySales}
+                                Rs {monthlySales}/-
                             </h5>
                         </div>
                         <div className="w-full mb-4 800px:w-[30%] min-h-[20vh] bg-white shadow rounded px-2 py-5">
@@ -161,7 +162,7 @@ const AdminDashboardMain = () => {
                                 </h3>
                             </div>
                             <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">
-                                $ {yearlySales}
+                                Rs {yearlySales}/-
                             </h5>
                         </div>
 
