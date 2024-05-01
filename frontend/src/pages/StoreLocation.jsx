@@ -6,20 +6,9 @@ import Header from "../components/Layout/Header";
 import Loader from "../components/Layout/Loader";
 import ProductCard from "../components/Route/ProductCard/ProductCard";
 import styles from "../styles/styles";
+import SidebarLink from "../components/SidebarLink";
 
 const StoreLocation = () => {
-    const SidebarLink = ({ label }) => {
-        return (
-            <li className="mb-2">
-                <a
-                    href="#"
-                    className={`${styles.sidebarLink} hover:${styles.sidebarLinkHover}`}
-                >
-                    {label}
-                </a>
-            </li>
-        );
-    };
     // Placeholder data until backend integration
     const demoImages = [
         "https://media.istockphoto.com/id/1501103626/photo/defocused-background-image-of-a-spacious-hallway-in-a-modern-office.webp?b=1&s=170667a&w=0&k=20&c=3HUg5TdHHWq4rmYJ7lA0Jn9koAesfCrO4lFiEaUFKuI=",
@@ -59,73 +48,22 @@ const StoreLocation = () => {
                             championing the talents of independent sellers from
                             around the globe.
                         </p>
-                        <p className="text-lg mb-6">
-                            At the heart of Modcub is Viral Production Studio, a
-                            forward-thinking collective committed to fostering
-                            innovation and originality in the digital sphere.
-                            With a keen eye for emerging trends and a commitment
-                            to excellence, our team tirelessly curates a diverse
-                            array of products that inspire and delight.
-                        </p>
-                        <p className="text-lg mb-6">
-                            Our vision is to redefine the online shopping
-                            experience by connecting discerning shoppers with
-                            unique products that spark joy and inspire
-                            imagination. By empowering independent sellers and
-                            fostering collaboration, we create a vibrant
-                            ecosystem where creativity thrives and boundaries
-                            are broken.
-                        </p>
-                        <p className="text-lg mb-6">
-                            Quality is our top priority. Every product featured
-                            on [Platform Name] undergoes a rigorous selection
-                            process to ensure it meets our standards of
-                            excellence. From the finest materials to impeccable
-                            craftsmanship, we stand behind the quality and
-                            authenticity of each item available for purchase.
-                        </p>
-                        <p className="text-lg mb-6">
-                            We believe in the power of small businesses and
-                            independent creators to make a big impact. That's
-                            why we're dedicated to providing a platform where
-                            sellers can showcase their talents and reach a
-                            global audience. With customizable storefronts and
-                            marketing resources, we're here to help you turn
-                            your passion into profit.
-                        </p>
-                        <p className="text-lg mb-6">
-                            Shopping with Modcub is a seamless experience. Our
-                            user-friendly interface, advanced search filters,
-                            personalized recommendations, and secure payment
-                            options make it easy to find and enjoy your new
-                            favorites. Plus, with fast and reliable shipping,
-                            your treasures will be on their way to you in no
-                            time.
-                        </p>
-                        <p className="text-lg mb-6">
-                            Join the Modcub community today and discover a world
-                            of possibilities. Whether you're a seller looking to
-                            expand your reach or a shopper in search of
-                            something special, we invite you to be a part of our
-                            growing community of creators and connoisseurs.
-                            Welcome to Modcub. Welcome to the future of
-                            e-commerce.
-                        </p>{" "}
+
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d61101.047920689336!2d77.24807685457401!3d28.63368274228338!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfce26ec085ef%3A0x441e32f4fa5002fb!2sRed%20Fort!5e0!3m2!1sen!2sin!4v1714538050166!5m2!1sen!2sin"
+                            title="Google Maps Embedded Content"
+                            width="600"
+                            height="450"
+                            style={{ border: 0 }}
+                            allowFullScreen=""
+                            loading="lazy"
+                            referrerPolicy="no-referrer-when-downgrade"
+                        />
                     </div>
 
                     {/* Show sidebar only on medium and larger screens */}
                     <div className="w-full md:w-1/4 ml-0 md:ml-8">
-                        <div className="">
-                            <ul>
-                                <SidebarLink label="About Us" />
-                                <SidebarLink label="Terms" />
-                                <SidebarLink label="Company" />
-                                <SidebarLink label="Careers" />
-                                <SidebarLink label="Privacy Policy" />
-                                <SidebarLink label="Store Location" />
-                                {/* Additional sidebar links here */}
-                            </ul>
-                        </div>
+                        <SidebarLink />
                     </div>
                 </div>
                 <Footer />

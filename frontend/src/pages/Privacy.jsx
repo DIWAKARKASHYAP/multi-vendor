@@ -2,20 +2,9 @@ import React from "react";
 import Footer from "../components/Layout/Footer";
 import Header from "../components/Layout/Header";
 import styles from "../styles/styles";
+import SidebarLink from "../components/SidebarLink";
 
 const Privacy = () => {
-    const SidebarLink = ({ label }) => {
-        return (
-            <li className="mb-2">
-                <a
-                    href="#"
-                    className={`${styles.sidebarLink} hover:${styles.sidebarLinkHover}`}
-                >
-                    {label}
-                </a>
-            </li>
-        );
-    };
     // Placeholder data until backend integration
     const demoImages = [
         "https://media.istockphoto.com/id/1501103626/photo/defocused-background-image-of-a-spacious-hallway-in-a-modern-office.webp?b=1&s=170667a&w=0&k=20&c=3HUg5TdHHWq4rmYJ7lA0Jn9koAesfCrO4lFiEaUFKuI=",
@@ -247,17 +236,7 @@ const Privacy = () => {
                 </div>
 
                 <div className="w-1/4 ml-8">
-                    <div className="">
-                        <ul>
-                            <SidebarLink label="About Us" />
-                            <SidebarLink label="Terms" />
-                            <SidebarLink label="Company" />
-                            <SidebarLink label="Careers" />
-                            <SidebarLink label="Privacy Policy" />
-                            <SidebarLink label="Store Location" />
-                            {/* Additional sidebar links here */}
-                        </ul>
-                    </div>
+                    <SidebarLink />
                 </div>
             </div>
             <Footer />

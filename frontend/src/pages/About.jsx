@@ -6,20 +6,9 @@ import Header from "../components/Layout/Header";
 import Loader from "../components/Layout/Loader";
 import ProductCard from "../components/Route/ProductCard/ProductCard";
 import styles from "../styles/styles";
+import SidebarLink from "../components/SidebarLink";
 
 const About = () => {
-    const SidebarLink = ({ label }) => {
-        return (
-            <li className="mb-2">
-                <a
-                    href="#"
-                    className={`${styles.sidebarLink} hover:${styles.sidebarLinkHover}`}
-                >
-                    {label}
-                </a>
-            </li>
-        );
-    };
     // Placeholder data until backend integration
     const demoImages = [
         "https://media.istockphoto.com/id/1501103626/photo/defocused-background-image-of-a-spacious-hallway-in-a-modern-office.webp?b=1&s=170667a&w=0&k=20&c=3HUg5TdHHWq4rmYJ7lA0Jn9koAesfCrO4lFiEaUFKuI=",
@@ -115,17 +104,7 @@ const About = () => {
 
                     {/* Show sidebar only on medium and larger screens */}
                     <div className="w-full md:w-1/4 ml-0 md:ml-8">
-                        <div className="">
-                            <ul>
-                                <SidebarLink label="About Us" />
-                                <SidebarLink label="Terms" />
-                                <SidebarLink label="Company" />
-                                <SidebarLink label="Careers" />
-                                <SidebarLink label="Privacy Policy" />
-                                <SidebarLink label="Store Location" />
-                                {/* Additional sidebar links here */}
-                            </ul>
-                        </div>
+                        <SidebarLink />
                     </div>
                 </div>
                 <Footer />
