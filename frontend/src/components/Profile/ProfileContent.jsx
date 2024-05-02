@@ -55,15 +55,15 @@ const ProfileContent = ({ active }) => {
         reader.onload = () => {
             if (reader.readyState === 2) {
                 setAvatar(reader.result);
-                console.log("----------------------------------------");
-                console.log(avatar);
+                // console.log("----------------------------------------");
+                // console.log(avatar);
                 axios
                     .put(
-                        `${server}/user/update-avatar`
-                        // { avatar: reader.result }
-                        // {
-                        //   withCredentials: true,
-                        // }
+                        `${server}/user/update-avatar`,
+                        { avatar: reader.result },
+                        {
+                            withCredentials: true,
+                        }
                     )
                     .then((response) => {
                         dispatch(loadUser());
