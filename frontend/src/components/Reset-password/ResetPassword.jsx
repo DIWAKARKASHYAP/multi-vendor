@@ -9,7 +9,7 @@ const ResetPassword = ({ match }) => {
     const [successMessage, setSuccessMessage] = useState("");
 
     const jtoken = window.location.pathname.split("/").pop();
-    console.log(jtoken);
+    // console.log(jtoken);
     const resetPassword = async () => {
         try {
             if (password !== confirmPassword) {

@@ -26,7 +26,7 @@ const AllProducts = () => {
                 if (res.data.success) {
                     // Remove the deleted product from the data
                     setData(data.filter((product) => product._id !== id));
-                    console.log(res.data.message);
+                    // console.log(res.data.message);
                 } else {
                     console.error(res.data.message);
                 }

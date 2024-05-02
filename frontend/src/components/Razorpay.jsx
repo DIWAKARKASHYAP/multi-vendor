@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { server } from "../server";
 import { toast } from "react-toastify";
 import { loadSeller } from "../redux/actions/user";
+import styles from "../styles/styles";
 
 const Razorpay = ({ amount, onSuccess, onFailure }) => {
     const [rzpLoaded, setRzpLoaded] = useState(false);
@@ -13,6 +14,10 @@ const Razorpay = ({ amount, onSuccess, onFailure }) => {
     React.useEffect(() => {
         dispatch(loadSeller());
     }, [dispatch]);
+
+    // console.log("===========================");
+    // console.log(seller);
+    // console.log("===========================");
     const handlePayment = async () => {
         if (!rzpLoaded) {
             const script = document.createElement("script");
@@ -48,10 +53,10 @@ const Razorpay = ({ amount, onSuccess, onFailure }) => {
             key: "rzp_test_JPBKvtfFBllt9C", // Replace with your Razorpay API key
             amount: amount * 100, // amount in paise
             currency: "INR",
-            name: "Your Company Name",
-            description: "Payment for Purchase",
+            name: "Modcub",
+            description: "Payment for Renewal",
             handler: function (response) {
-                console.log(response);
+                // console.log(response);
                 // On payment success, send verification request to backend
                 axios
                     .post(`${server}/shop/renew-subscription`, {
@@ -67,12 +72,12 @@ const Razorpay = ({ amount, onSuccess, onFailure }) => {
                     });
             },
             prefill: {
-                name: "Customer Name",
-                email: "customer@example.com",
-                contact: "9999999999",
+                name: seller.name,
+                email: seller.email,
+                contact: `91-${seller.phoneNumber}`,
             },
             notes: {
-                address: "Customer Address",
+                address: seller.address,
             },
             theme: {
                 color: "#3399cc",
@@ -85,10 +90,10 @@ const Razorpay = ({ amount, onSuccess, onFailure }) => {
     // 267007
     return (
         <button
-            className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+            className={`${styles.button} !bg-[#ab662e] text-[#fff] h-[45px] rounded-[5px] cursor-pointer text-[18px] font-[600]`}
             onClick={handlePayment}
         >
-            Renew for Next Month
+            Pay Now
             {/* {amount} INR */}
         </button>
     );

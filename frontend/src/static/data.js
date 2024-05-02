@@ -229,13 +229,14 @@ export const categoriesData = [
         title: "Gifts",
         subTitle: "",
         image_Url:
-            "https://securecdn.pymnts.com/wp-content/uploads/2014/11/Gifts-Photo-700x489.jpg",
+            "https://icons.iconarchive.com/icons/lovuhemant/merry-christmas/256/Gift-icon.png",
     },
     {
         id: 7,
         title: "Pet Care",
         subTitle: "",
-        image_Url: "https://cdn.openpr.com/T/c/Tc15444071_g.jpg",
+        image_Url:
+            "https://as1.ftcdn.net/v2/jpg/05/58/18/24/1000_F_558182456_7zDecX2F22p22kK2LP5Gw3EUsZomwkJg.jpg",
     },
     {
         id: 8,

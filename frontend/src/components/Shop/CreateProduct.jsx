@@ -21,7 +21,7 @@ const CreateProduct = () => {
     const [discountPrice, setDiscountPrice] = useState();
     const [stock, setStock] = useState();
 
-    console.log(images);
+    // console.log(images);
     useEffect(() => {
         if (error) {
             toast.error(error);

@@ -19,6 +19,7 @@ import { useEffect } from "react";
 import { addTocart } from "../../../redux/actions/cart";
 import { toast } from "react-toastify";
 import Ratings from "../../Products/Ratings";
+import { Button } from "flowbite-react";
 
 const ProductCard = ({ data, isEvent }) => {
     const { wishlist } = useSelector((state) => state.wishlist);
@@ -102,18 +103,24 @@ const ProductCard = ({ data, isEvent }) => {
                             <h5 className={`${styles.productDiscountPrice}`}>
                                 {data.originalPrice === 0
                                     ? data.originalPrice
-                                    : data.discountPrice}
-                                $
+                                    : data.discountPrice}{" "}
+                                Rs
                             </h5>
                             <h4 className={`${styles.price}`}>
                                 {data.originalPrice
-                                    ? data.originalPrice + " $"
+                                    ? data.originalPrice + " " + " Rs"
                                     : null}
                             </h4>
                         </div>
-                        <span className="font-[400] text-[17px] text-[#68d284]">
+                        {/* <span className="font-[400] text-[17px] text-[#68d284]">
                             {data?.sold_out} sold
-                        </span>
+                        </span> */}
+                        <button
+                            type="button"
+                            class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900"
+                        >
+                            Buy
+                        </button>{" "}
                     </div>
                 </Link>
 

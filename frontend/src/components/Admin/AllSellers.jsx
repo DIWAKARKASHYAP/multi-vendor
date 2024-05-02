@@ -33,7 +33,7 @@ const AllSellers = () => {
         dispatch(getAllSellers());
     };
 
-    console.log(sellers);
+    // console.log(sellers);
     // const handleSuspend = async (id) => {
     const handleSuspend = async (id, suspend) => {
         if (suspend) {

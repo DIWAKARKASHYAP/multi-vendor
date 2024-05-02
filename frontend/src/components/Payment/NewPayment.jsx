@@ -19,9 +19,9 @@ const NewPayment = () => {
     const [open, setOpen] = useState(false);
     const { user } = useSelector((state) => state.user);
     const navigate = useNavigate();
-    console.log("--------------------------------------");
-    console.log(orderData);
-    console.log("--------------------------------------");
+    // console.log("--------------------------------------");
+    // console.log(orderData);
+    // console.log("--------------------------------------");
 
     useEffect(() => {
         const orderData = JSON.parse(localStorage.getItem("latestOrder"));
@@ -41,7 +41,7 @@ const NewPayment = () => {
     const RazorPayHandler = async (e) => {
         e.preventDefault();
 
-        console.log("running razorpay");
+        // console.log("running razorpay");
 
         const config = {
             headers: {
@@ -67,7 +67,7 @@ const NewPayment = () => {
 
     const cashOnDeliveryHandler = async (e) => {
         e.preventDefault();
-        console.log("running cashOnDeliveryHandler");
+        // console.log("running cashOnDeliveryHandler");
 
         const config = {
             headers: {
@@ -196,7 +196,7 @@ const CartData = ({ orderData }) => {
                     subtotal:
                 </h3>
                 <h5 className="text-[18px] font-[600]">
-                    ${orderData?.subTotalPrice}
+                    Rs={orderData?.subTotalPrice}
                 </h5>
             </div>
             <br />
@@ -204,7 +204,7 @@ const CartData = ({ orderData }) => {
                 <h3 className="text-[16px] font-[400] text-[#000000a4]">
                     shipping:
                 </h3>
-                <h5 className="text-[18px] font-[600]">${shipping}</h5>
+                <h5 className="text-[18px] font-[600]">Rs={shipping}</h5>
             </div>
             <br />
             <div className="flex justify-between border-b pb-3">
@@ -213,12 +213,12 @@ const CartData = ({ orderData }) => {
                 </h3>
                 <h5 className="text-[18px] font-[600]">
                     {orderData?.discountPrice
-                        ? "$" + orderData.discountPrice
+                        ? "Rs=" + orderData.discountPrice
                         : "-"}
                 </h5>
             </div>
             <h5 className="text-[18px] font-[600] text-end pt-3">
-                ${orderData?.totalPrice}
+                Rs={orderData?.totalPrice}
             </h5>
             <br />
         </div>
