@@ -103,7 +103,7 @@ router.put(
     catchAsyncErrors(async (req, res, next) => {
         try {
             const order = await Order.findById(req.params.id);
-
+            console.log(order);
             if (!order) {
                 return next(
                     new ErrorHandler("Order not found with this id", 400)
@@ -143,7 +143,7 @@ router.put(
             async function updateSellerInfo(amount) {
                 const seller = await Shop.findById(req.seller.id);
 
-                seller.availableBalance = amount;
+                seller.availableBalance = seller.availableBalance + amount;
 
                 await seller.save();
             }
