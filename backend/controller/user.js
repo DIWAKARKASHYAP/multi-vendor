@@ -236,12 +236,15 @@ router.put(
     "/update-avatar",
     isAuthenticated,
     catchAsyncErrors(async (req, res, next) => {
+        // console.log(req.user);
         try {
             let existsUser = await User.findById(req.user.id);
             if (req.body.avatar !== "") {
                 const imageId = existsUser.avatar.public_id;
 
-                await cloudinary.v2.uploader.destroy(imageId);
+                if (existsUser.avatar.public_id) {
+                    await cloudinary.v2.uploader.destroy(imageId);
+                }
 
                 const myCloud = await cloudinary.v2.uploader.upload(
                     req.body.avatar,
@@ -250,6 +253,8 @@ router.put(
                         width: 150,
                     }
                 );
+
+                // console.log(myCloud);
 
                 existsUser.avatar = {
                     public_id: myCloud.public_id,
@@ -264,6 +269,7 @@ router.put(
                 user: existsUser,
             });
         } catch (error) {
+            console.log(error);
             return next(new ErrorHandler(error.message, 500));
         }
     })

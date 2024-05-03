@@ -76,7 +76,7 @@ const AllUsers = () => {
                 const { role, id } = params.row;
                 const isSuperAdmin = user.role === "SuperAdmin";
                 const isAdmin = user.role === "Admin";
-                console.log(user.role);
+                // console.log(user.role);
                 if (isAdmin) {
                     return (
                         <>

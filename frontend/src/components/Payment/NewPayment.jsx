@@ -35,6 +35,7 @@ const NewPayment = () => {
         totalPrice: orderData?.totalPrice,
         paymentInfo: {
             type: "Pay with Razorpay",
+            status: "Paid",
         },
     };
 

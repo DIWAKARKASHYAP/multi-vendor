@@ -8,7 +8,7 @@ import Razorpay from "../../components/Razorpay";
 
 const DashboardRenew = () => {
     const { seller } = useSelector((state) => state.seller);
-    console.log(seller);
+    // console.log(seller);
     const dispatch = useDispatch();
     React.useEffect(() => {
         dispatch(loadSeller());

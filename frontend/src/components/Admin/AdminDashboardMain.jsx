@@ -34,16 +34,17 @@ const AdminDashboardMain = () => {
 
     const monthlySales =
         adminOrders &&
-        adminOrders
-            .filter((order) => {
-                const orderDate = new Date(order.createdAt);
-                return (
-                    orderDate.getFullYear() === currentYear &&
-                    orderDate.getMonth() + 1 === currentMonth
-                );
-            })
-            .reduce((acc, order) => acc + order.totalPrice, 0)
-            .toFixed(2);
+        (
+            adminOrders
+                .filter((order) => {
+                    const orderDate = new Date(order.createdAt);
+                    return (
+                        orderDate.getFullYear() === currentYear &&
+                        orderDate.getMonth() + 1 === currentMonth
+                    );
+                })
+                .reduce((acc, order) => acc + order.totalPrice, 0) / 10
+        ).toFixed(2);
 
     const yearlySales =
         adminOrders &&

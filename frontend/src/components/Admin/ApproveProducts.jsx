@@ -96,7 +96,7 @@ const ApproveProducts = () => {
         .map((item) => ({
             id: item._id,
             name: item.name,
-            price: "US$ " + item.discountPrice,
+            price: "Rs " + item.discountPrice,
             Stock: item.stock,
             approve: item.approve,
         }));

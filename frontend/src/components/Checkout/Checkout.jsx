@@ -365,7 +365,7 @@ const CartData = ({
                 <h5 className="text-[18px] font-[600]">
                     -{" "}
                     {discountPercentenge
-                        ? "$" + discountPercentenge.toString()
+                        ? "Rs " + discountPercentenge.toString()
                         : null}
                 </h5>
             </div>
