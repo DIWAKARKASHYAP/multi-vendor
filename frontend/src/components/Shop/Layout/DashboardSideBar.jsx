@@ -180,7 +180,7 @@ const DashboardSideBar = ({ active }) => {
                     </h5>
                 </Link>
             </div>
-
+            {/* 
             <div className="w-full flex items-center p-4">
                 <Link
                     to="/dashboard-refunds"
@@ -198,7 +198,7 @@ const DashboardSideBar = ({ active }) => {
                         Refunds
                     </h5>
                 </Link>
-            </div>
+            </div> */}
 
             <div className="w-full flex items-center p-4">
                 <Link to="/settings" className="w-full flex items-center">
