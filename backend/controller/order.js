@@ -120,7 +120,7 @@ router.put(
             if (req.body.status === "Delivered") {
                 order.deliveredAt = Date.now();
                 order.paymentInfo.status = "Succeeded";
-                const serviceCharge = order.totalPrice * 0.1;
+                const serviceCharge = order.totalPrice * 0.07;
                 await updateSellerInfo(order.totalPrice - serviceCharge);
             }
 

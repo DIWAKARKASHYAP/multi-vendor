@@ -630,9 +630,11 @@ export const footercompanyLinks = [
     },
     {
         name: "Return Center",
+        link: "/return-center",
     },
     {
         name: "Help",
+        link: "/help",
     },
 ];
 
@@ -649,10 +651,10 @@ export const footerSupportLinks = [
         name: "Contact Us",
         link: "/contactus",
     },
-    {
-        name: "Shipping",
-    },
-    {
-        name: "Live chat",
-    },
+    // {
+    // name: "Shipping",
+    // },
+    // {
+    // name: "Live chat",
+    // },
 ];

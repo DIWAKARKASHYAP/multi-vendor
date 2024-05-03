@@ -21,10 +21,10 @@ const DashboardHeader = () => {
             </div>
             <div className="flex items-center">
                 <div className="flex items-center mr-4">
-                    <Link to="/dashboard-renew" className="800px:block hidden">
+                    {/* <Link to="/dashboard-renew" className="800px:block hidden">
                         <Button>Renew</Button>
-                    </Link>
-                    <Link
+                    </Link> */}
+                    {/* <Link
                         to="/dashboard/cupouns"
                         className="800px:block hidden"
                     >
@@ -33,7 +33,7 @@ const DashboardHeader = () => {
                             size={30}
                             className="mx-5 cursor-pointer"
                         />
-                    </Link>
+                    </Link> */}
                     <Link to="/dashboard-events" className="800px:block hidden">
                         <MdOutlineLocalOffer
                             color="#555"

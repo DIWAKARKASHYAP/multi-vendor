@@ -8,7 +8,8 @@ import ProductCard from "../components/Route/ProductCard/ProductCard";
 import styles from "../styles/styles";
 import SidebarLink from "../components/SidebarLink";
 
-const About = () => {
+const Help = () => {
+    // Placeholder data until backend integration
     const demoImages = [
         "https://media.istockphoto.com/id/1501103626/photo/defocused-background-image-of-a-spacious-hallway-in-a-modern-office.webp?b=1&s=170667a&w=0&k=20&c=3HUg5TdHHWq4rmYJ7lA0Jn9koAesfCrO4lFiEaUFKuI=",
         "https://www.maidwale.com/images/about/istockphoto-1283119095-170667a.jpg",
@@ -26,7 +27,7 @@ const About = () => {
                         className="w-full h-auto rounded-md mb-6 md:mb-0 h-[700px]"
                     />
                     <div className="absolute bottom-10 md:bottom-56 left-4 md:left-40 text-gray-100 text-5xl md:text-6xl font-Poppins font-bold">
-                        About Us
+                        Help
                         <div className="text-base md:text-xl font-medium">
                             Learn what we are all about
                         </div>
@@ -112,4 +113,4 @@ const About = () => {
     );
 };
 
-export default About;
+export default Help;

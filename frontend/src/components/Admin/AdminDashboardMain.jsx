@@ -25,7 +25,7 @@ const AdminDashboardMain = () => {
     console.log(adminOrders);
     const adminEarning =
         adminOrders &&
-        adminOrders.reduce((acc, order) => acc + order.totalPrice * 0.1, 0);
+        adminOrders.reduce((acc, order) => acc + order.totalPrice * 0.7, 0);
 
     const adminBalance = adminEarning?.toFixed(2);
 

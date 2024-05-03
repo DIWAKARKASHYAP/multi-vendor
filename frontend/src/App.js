@@ -76,6 +76,9 @@ import Corporate from "./pages/Corporate.jsx";
 import BrandCollaborate from "./pages/BrandCollaborate.jsx";
 import OurBlogs from "./pages/OurBlogs.jsx";
 import Review from "./pages/Review.jsx";
+import Carrers from "./pages/Carrers.jsx";
+import Help from "./pages/Help.jsx";
+import ReturCenter from "./pages/ReturnCenter.jsx";
 
 const App = () => {
     const [stripeApikey, setStripeApiKey] = useState("");
@@ -122,6 +125,8 @@ const App = () => {
                 <Route path="/contactus" element={<ContactUs />} />
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/terms" element={<Terms />} />
+                <Route path="/carrers" element={<Carrers />} />
+                <Route path="/help" element={<Help />} />
                 <Route path="/store-location" element={<StoreLocation />} />
                 <Route path="/corporate" element={<Corporate />} />
                 <Route
@@ -130,6 +135,7 @@ const App = () => {
                 />
                 <Route path="/our-blogs" element={<OurBlogs />} />
                 <Route path="/review" element={<Review />} />
+                <Route path="/return-center" element={<ReturCenter />} />
 
                 <Route
                     path="/activation/:activation_token"

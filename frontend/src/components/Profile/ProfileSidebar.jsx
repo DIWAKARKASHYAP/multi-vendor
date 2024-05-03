@@ -109,7 +109,7 @@ const ProfileSidebar = ({ setActive, active }) => {
                 </span>
             </div>
 
-            <div
+            {/* <div
                 className="flex items-center cursor-pointer w-full mb-8"
                 onClick={() => setActive(6)}
             >
@@ -124,7 +124,7 @@ const ProfileSidebar = ({ setActive, active }) => {
                 >
                     Change Password
                 </span>
-            </div>
+            </div> */}
 
             <div
                 className="flex items-center cursor-pointer w-full mb-8"
@@ -152,7 +152,7 @@ const ProfileSidebar = ({ setActive, active }) => {
                         />
                         <span
                             className={`pl-3 ${
-                                active === 8 ? "text-[red]" : ""
+                                active === 10 ? "text-[red]" : ""
                             } 800px:block hidden`}
                         >
                             Admin Dashboard
@@ -168,7 +168,7 @@ const ProfileSidebar = ({ setActive, active }) => {
                     >
                         <MdOutlineAdminPanelSettings
                             size={20}
-                            color={active === 7 ? "red" : ""}
+                            color={active === 10 ? "red" : ""}
                         />
                         <span
                             className={`pl-3 ${

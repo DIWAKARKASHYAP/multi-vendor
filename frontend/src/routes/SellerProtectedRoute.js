@@ -17,9 +17,10 @@ const SellerProtectedRoute = ({ children }) => {
             return <Navigate to={`/shop-login`} replace />;
         } else if (seller.suspend) {
             return <Navigate to={`/suspend`} replace />;
-        } else if (seller && new Date(seller.expirationDate) < new Date()) {
-            return <Navigate to={`/dashboard-renew`} replace />;
         }
+        // else if (seller && new Date(seller.expirationDate) < new Date()) {
+        //     return <Navigate to={`/dashboard-renew`} replace />;
+        // }
         return children;
     }
 };

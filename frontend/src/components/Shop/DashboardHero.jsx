@@ -21,7 +21,7 @@ const DashboardHero = () => {
     }, [dispatch]);
 
     const availableBalance = seller?.availableBalance.toFixed(2);
-
+    // console.log(seller);
     const columns = [
         { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
 
@@ -100,7 +100,7 @@ const DashboardHero = () => {
                         >
                             Account Balance{" "}
                             <span className="text-[16px]">
-                                (with 10% service charge)
+                                (with 7% service charge)
                             </span>
                         </h3>
                     </div>

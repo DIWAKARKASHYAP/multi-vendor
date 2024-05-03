@@ -243,7 +243,7 @@ const AllOrders = () => {
         },
         {
             field: "itemsQty",
-            headerName: "Items Qty",
+            headerName: "Cart Qty",
             type: "number",
             minWidth: 130,
             flex: 0.7,
@@ -416,7 +416,7 @@ const TrackOrder = () => {
         },
         {
             field: "itemsQty",
-            headerName: "Items Qty",
+            headerName: "Cart Qty",
             type: "number",
             minWidth: 130,
             flex: 0.7,
