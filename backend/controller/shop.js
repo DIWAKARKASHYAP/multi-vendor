@@ -237,9 +237,8 @@ router.put(
         try {
             let existsSeller = await Shop.findById(req.seller._id);
 
-            const imageId = existsSeller.avatar.public_id;
-
             if (existsSeller.avatar.public_id) {
+                const imageId = existsSeller.avatar.public_id;
                 await cloudinary.v2.uploader.destroy(imageId);
             }
 

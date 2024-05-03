@@ -240,9 +240,8 @@ router.put(
         try {
             let existsUser = await User.findById(req.user.id);
             if (req.body.avatar !== "") {
-                const imageId = existsUser.avatar.public_id;
-
                 if (existsUser.avatar.public_id) {
+                    const imageId = existsUser.avatar.public_id;
                     await cloudinary.v2.uploader.destroy(imageId);
                 }
 
