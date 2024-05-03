@@ -239,7 +239,9 @@ router.put(
 
             const imageId = existsSeller.avatar.public_id;
 
-            await cloudinary.v2.uploader.destroy(imageId);
+            if (existsSeller.avatar.public_id) {
+                await cloudinary.v2.uploader.destroy(imageId);
+            }
 
             const myCloud = await cloudinary.v2.uploader.upload(
                 req.body.avatar,
