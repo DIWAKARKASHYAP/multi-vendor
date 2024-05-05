@@ -20,6 +20,7 @@ const AllProducts = () => {
 
     const handleDelete = (id) => {
         dispatch(deleteProduct(id));
+
         window.location.reload();
     };
 
@@ -109,6 +110,9 @@ const AllProducts = () => {
                 <Loader />
             ) : (
                 <div className="w-full mx-8 pt-1 mt-10 bg-white">
+                    <h3 className="text-[22px] font-Poppins pb-2">
+                        All Products
+                    </h3>
                     <DataGrid
                         rows={row}
                         columns={columns}

@@ -104,6 +104,10 @@ const ApproveProducts = () => {
     return (
         <>
             <div className="w-full mx-8 pt-1 mt-10 bg-white">
+                <h3 className="text-[22px] font-Poppins pb-2">
+                    Approve Products
+                </h3>
+
                 <DataGrid
                     rows={rows}
                     columns={columns}

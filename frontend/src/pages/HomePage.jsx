@@ -18,8 +18,8 @@ const HomePage = () => {
             <div className=" w-[1400px] h-1 my-20 bg-amber-900  rounded-full m-auto"></div>
 
             <BestDeals />
-            <div className=" w-[1400px] h-1 my-20 bg-amber-900  rounded-full m-auto"></div>
-            <Events />
+            {/* <div className=" w-[1400px] h-1 my-20 bg-amber-900  rounded-full m-auto"></div> */}
+            {/* <Events /> */}
             <div className=" w-[1400px] h-1 my-20 bg-amber-900  rounded-full m-auto"></div>
             <FeaturedProduct />
             {/* <Sponsored /> */}

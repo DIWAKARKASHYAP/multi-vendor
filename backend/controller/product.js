@@ -147,24 +147,32 @@ router.get(
 );
 
 // delete product of a shop
+
 router.delete(
     "/delete-shop-product/:id",
     isSeller,
     catchAsyncErrors(async (req, res, next) => {
+        console.log("delete is working");
         try {
             const product = await Product.findById(req.params.id);
+
+            console.log("Product:", product); // Log the product to see what's returned
 
             if (!product) {
                 return next(
                     new ErrorHandler("Product is not found with this id", 404)
                 );
             }
+            console.log("delete is working 1");
 
-            for (let i = 0; 1 < product.images.length; i++) {
-                const result = await cloudinary.v2.uploader.destroy(
-                    product.images[i].public_id
-                );
+            if (product.images.length > 0) {
+                for (let i = 0; i < product.images.length; i++) {
+                    const result = await cloudinary.v2.uploader.destroy(
+                        product.images[i].public_id
+                    );
+                }
             }
+            console.log("delete is working 2");
 
             await product.remove();
 
@@ -173,6 +181,7 @@ router.delete(
                 message: "Product Deleted successfully!",
             });
         } catch (error) {
+            console.log(error);
             return next(new ErrorHandler(error, 400));
         }
     })

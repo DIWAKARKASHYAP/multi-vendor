@@ -113,12 +113,12 @@ const AdminSideBar = ({ active }) => {
                             active === 10 ? "text-[crimson]" : "text-[#555]"
                         }`}
                     >
-                        approve products
+                        Approve Products
                     </h5>
                 </Link>
             </div>
 
-            <div className="w-full flex items-center p-4">
+            {/* <div className="w-full flex items-center p-4">
                 <Link to="/admin-events" className="w-full flex items-center">
                     <MdOutlineLocalOffer
                         size={30}
@@ -132,7 +132,7 @@ const AdminSideBar = ({ active }) => {
                         All Events
                     </h5>
                 </Link>
-            </div>
+            </div> */}
             {user.role === "SuperAdmin" ? (
                 <div className="w-full flex items-center p-4">
                     <Link

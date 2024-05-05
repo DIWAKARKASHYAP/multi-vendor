@@ -61,7 +61,7 @@ const AdminDashboardOrders = () => {
             row.push({
                 id: item._id,
                 itemsQty: item?.cart?.reduce((acc, item) => acc + item.qty, 0),
-                total: item?.totalPrice + " $",
+                total: item?.totalPrice + " Rs",
                 status: item?.status,
                 createdAt: item?.createdAt.slice(0, 10),
             });
@@ -74,9 +74,11 @@ const AdminDashboardOrders = () => {
                     <div className="w-[80px] 800px:w-[330px]">
                         <AdminSideBar active={2} />
                     </div>
-
                     <div className="w-full min-h-[45vh] pt-5 rounded flex justify-center">
-                        <div className="w-[97%] flex justify-center">
+                        <div className="w-[97%] flex justify-center flex-col">
+                            <h3 className="text-[22px] font-Poppins pb-2">
+                                All Orders
+                            </h3>
                             <DataGrid
                                 rows={row}
                                 columns={columns}
